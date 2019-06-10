@@ -1,7 +1,7 @@
 site_name: "RAVANOS Documentation"
 site_url: https://wiki.ravanos.org/
-copyright: 'Copyright 2019 Chinthaka Deshapriya'
-repo_name: openemail/openemail
+copyright: 'Copyright 2019 Chinthaka Deshapriya and RAVANOS.ORG'
+repo_name: ravanos/ravanos.github.io
 repo_url: https://github.com/openemail/openemail-docs/
 edit_uri: edit/master/docs/
 theme:

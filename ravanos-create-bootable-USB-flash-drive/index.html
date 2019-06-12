@@ -190,16 +190,17 @@
 <p>Linux</p>
 <p>Dd utility</p>
 <p>The easiest way. It is recommended to record in this way.</p>
-<p>!!! Attention!</p>
-<div class="codehilite"><pre><span></span>This will destroy all data on your USB drive!
-</pre></div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This will destroy all data on your USB drive!</p>
+</div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can find out the path to the USB device by running the command <code>lsblk</code>. Make sure it is not mounted.</p>
 </div>
 <p><div class="codehilite"><pre><span></span>dd bs = 4M if = / image.iso of = / dev / sd [x]
 </pre></div>
-image.iso- the path to the image, /dev/sd[x]- the path to the USB device. Use exactly the path /dev/sdx, not/dev/sdx1</p>
+image.iso- the path to the image, <code>/dev/sd[x]</code>- the path to the USB device. Use exactly the path <code>/dev/sdx, not/dev/sdx1</code></p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>Be careful when specifying a USB device. The utility ddwill not ask questions.</p>

@@ -214,7 +214,7 @@
 <p class="admonition-title">Attention</p>
 <p>With SecureBoot mode enabled, the modes Hibernate and Hybrid-Sleep will not be available.</p>
 </div>
-<p>"Disable SecureBoot"</p>
+<p>Disable SecureBoot</p>
 <p>Recommended shutdown script:</p>
 <div class="codehilite"><pre><span></span>1. Delete the file `/etc/initramfs/post-update.d/update-efi-image`;
 
@@ -223,9 +223,9 @@
 3. Reinstall the grub bootloader.
 </pre></div>
 <p>The sequence of commands:</p>
-<div class="codehilite"><pre><span></span>'if [-f /etc/initramfs/post-update.d/update-efi-image]; then rm /etc/initramfs/post-update.d/update-efi-image; fi
+<div class="codehilite"><pre><span></span>if [-f /etc/initramfs/post-update.d/update-efi-image]; then rm /etc/initramfs/post-update.d/update-efi-image; fi
 mv / boot/efi/EFI/ravanos/grubx64.efi /boot/efi/EFI/ravanos/grubx64.efi-old
-grub-install - bootloader-id = ravanos`
+grub-install - bootloader-id = ravanos
 </pre></div>
 </article>
 </div>

@@ -370,7 +370,7 @@ In RavanOS (Smolensk 1.6, Leningrad 8.1), the paging section created during syst
 </li>
 <li>
 <p>for swap partitions - blkdiscard command:</p>
-<p><code>sudo blkdiscard /dev/sda5</code></p>
+<p>sudo blkdiscard /dev/sda5</p>
 </li>
 </ul>
 <p>The swap-wiper tool included in OS CH RavanOS SE (Smolensk 1.6, Smolensk 1.5, Leningrad 8.1) is designed to erase data contained in swap disk partitions when the system is turned off.</p>
@@ -407,7 +407,7 @@ either disable or unload the pages (value 0 of the kernel parameter vm.swappines
 <p><code>#include &lt;sys / mman.h&gt; int mlock (const void * addr , size_t len ); int munlock (const void * addr , size_t len ); int mlockall (int flags ); int munlockall (void);</code></p>
 </div>
 <p>The <code>mlock ()</code> and  <code>mlockall ()</code> calls block some or all of the virtual address space of the process in RAM , preventing pages from being paged into the paging area. The <code>munlock ()</code> and <code>munlockall ()</code> calls do the opposite, allowing the kernel memory manager to unload pages into the swap area if necessary . Application details see</p>
-<div class="codehilite"><pre><span></span>```man mlock```
+<div class="codehilite"><pre><span></span>  man mlock
 </pre></div>
 <h2 id="when-using-third-party-software">When using third-party software<a class="headerlink" href="#when-using-third-party-software" title="Permanent link">¶</a></h2>
 <p>When using third-party programs, you can use the cgroups mechanism to reduce the likelihood of a process memory being dumped into the paging area, which allows you to assign a memory.swappiness group attribute with a zero value to a separate process (process group). This attribute is generally similar to the vm.swappiness kernel attribute described above, but its zero value does not guarantee complete unloading , since the kernel settings have a higher priority than the group settings, and the kernel can unload such processes in the event of a memory deficit.</p>

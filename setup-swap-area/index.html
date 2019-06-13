@@ -77,6 +77,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#create-a-1gb-file" tabindex="1">
+        Skip to content
+      </a>
 <header class="md-header" data-md-component="header">
 <nav class="md-header-nav md-grid">
 <div class="md-flex">
@@ -184,11 +187,6 @@
     </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../installing-ravanos-on-fake-raid.md" title="Installing RavanOS on Fake RAID">
-      Installing RavanOS on Fake RAID
-    </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="../installing-ravanos-on-soft-raid/" title="Installing RavanOS on Soft RAID">
       Installing RavanOS on Soft RAID
     </a>
@@ -207,10 +205,17 @@
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset"><a class="md-icon md-content__icon" download href="setup-swap-area.pdf" title="PDF Export"></a>
 <a class="md-icon md-content__icon" href="https://github.com/ravanos/ravanos-wiki/edit/master/docs/setup-swap-area.md" title="Edit this page"></a>
-<h1>Setup Swap Area</h1>
 <p>Swap area (swap): application and security features</p>
 <p>The need to use swap</p>
 <p>The presence of the swap area is an important component of the memory management system, and is necessary for the normal functioning of the system .</p>
@@ -248,9 +253,75 @@ You can check where the swap area (s) are located (placed) with the command</p>
 <p class="admonition-title">Info</p>
 <p>If you need to check file fragmentation, use the filefrag command:</p>
 <p><code>sudo filefrag -v /example.swap</code></p>
-<p><code>To reduce file fragmentation in the Ext4 file system, use the e4defrag command:</code></p>
-<p>sudo e4defrag -v /example.swap
-When placing files on solid-state drives, defragmentation does not make any sense.</p>
+<p>To reduce file fragmentation in the Ext4 file system, use the e4defrag command:</p>
+<p><code>sudo e4defrag -v /example.swap</code></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When placing files on solid-state drives, defragmentation does not make any sense.</p>
+</div>
+<p>Swap Area Size</p>
+<p>In general, for RavanOS, the correct initial choice may be a 2-3GB swap area, followed by refinement based on the results of operation. If you intend to use the sleep mode ( hibernation or suspend to disk ) while preserving the RAM image, then the required volume depends on the RAM size, and in this case, a good initial version of the size of the swap area is a volume equal to the RAM size plus 2-3GB.</p>
+<p>The main parameter for swapping is the value of the kernel parameter <code>vm.swappiness</code> , which determines the amount of free memory (in percent) at which page displacement begins. You can check the value of this parameter with the command:</p>
+<div class="codehilite"><pre><span></span>```sudo sysctl vm.swappiness```
+</pre></div>
+<p>Swap setup</p>
+<p>By default, the value of <code>vm.swappiness</code> is 60, i.e. paging out of memory pages begins when free memory becomes less than 60%.</p>
+<p>It is believed that this value works well for most systems. You can change the value of the
+<code>vm.swappiness</code> parameter by the command:</p>
+<div class="codehilite"><pre><span></span>```sysctl -w vm.swappiness = &amp;lt;new_value&amp;gt;```
+</pre></div>
+<p>The minimum attribute value at which the swap will work is one.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you set the vm.swappiness parameter to zero, the swap is turned off completely.</p>
+</div>
+<p>Security data in the paging area
+Memory pages that are dynamically copied from RAM to the paging space during computer operation may contain confidential information that is not covered by any protective transformations. Thus, having read access to the paging area creates the risk of leakage of confidential information.</p>
+<p>A separate problem from the point of view of security is storage in the swap area of ​​the contents of the RAM of computers that are turned off. A copy of the contents of RAM can remain in the swap area:</p>
+<ul>
+<li>
+<p>in case of unexpected shutdown of the computer as a result of a hardware failure;</p>
+</li>
+<li>
+<p>in case of unexpected power failure;</p>
+</li>
+<li>
+<p>and always remains there in computers that are in sleep mode.</p>
+</li>
+</ul>
+<p>If there is physical access to the equipment, such data can be read regardless of the established discretionary and mandatory limitations.</p>
+<p>Paging Security Guidelines
+In RavanOS (Smolensk 1.6, Leningrad 8.1), the paging section created during system installation is automatically assigned a security label with maximum levels of confidentiality and integrity and the maximum set of access categories:</p>
+<ul>
+<li>
+<p>Privacy Level 3;</p>
+</li>
+<li>
+<p>Integrity level 63;</p>
+</li>
+<li>
+<p>The set of access categories is complete.</p>
+</li>
+</ul>
+<p>Thus, when installing RavanOS (Smolensk 1.6, Leningrad 8.1), unprivileged users are automatically protected from reading the swap space.</p>
+<p>However, the system administrator has the option to add his own swap areas after installation <code>(see the mkswap / swapon / swapoff commands, as well as the swapon () / swapoff () system calls)</code>. At the same time, the operating system does not check the access rights set for the paging area being added, and the administrator should independently specify the necessary restrictions on discretionary and mandatory access rights. For example, the following command sequence can be used to place the paging space in the / swap_area file:</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<h1 id="create-a-1gb-file">create a 1Gb file<a class="headerlink" href="#create-a-1gb-file" title="Permanent link">¶</a></h1>
+<p>sudo fallocate -l 1G /swap_area</p>
+<h1 id="restrict-discretionary-access-rights-for-ravanos-se-ravanos-ce">restrict discretionary access rights (for RavanOS SE /RavanOS CE)<a class="headerlink" href="#restrict-discretionary-access-rights-for-ravanos-se-ravanos-ce" title="Permanent link">¶</a></h1>
+<p><code>sudo chown root: root /swap_area</code>
+<code>sudo chmod 600 /swap_area</code></p>
+<h1 id="limit-mandated-access-rights-only-for-the-linux-operating-system-ch-se-the-ravanos">Limit mandated access rights (only for the Linux operating system CH SE the RavanOS)<a class="headerlink" href="#limit-mandated-access-rights-only-for-the-linux-operating-system-ch-se-the-ravanos" title="Permanent link">¶</a></h1>
+<h1 id="-privacy-3">- privacy 3<a class="headerlink" href="#-privacy-3" title="Permanent link">¶</a></h1>
+<h1 id="-integrity-level-63">- integrity level 63<a class="headerlink" href="#-integrity-level-63" title="Permanent link">¶</a></h1>
+<h1 id="-open-all-cat-e-gorii-access">- open all cat e gorii access<a class="headerlink" href="#-open-all-cat-e-gorii-access" title="Permanent link">¶</a></h1>
+<p>sudo pdpl-file 3: 63: -1 /swap_area</p>
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
+<p>mark up the swap area sudo mkswap / swap_area</p>
+<h1 id="include-swap-space-in">include swap space in<a class="headerlink" href="#include-swap-space-in" title="Permanent link">¶</a></h1>
+<p><code>sudo swapon /swap_area</code></p>
 </div>
 </article>
 </div>

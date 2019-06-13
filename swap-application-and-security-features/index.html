@@ -18,7 +18,7 @@
 <meta content="[\s\-]+" name="lang:search.tokenizer"/>
 <link href="../images/favicon.png" rel="shortcut icon"/>
 <meta content="mkdocs-1.0.4, mkdocs-material-4.0.2" name="generator"/>
-<title>Swap application and security features - RAVANOS Documentation</title>
+<title>Swap Application and Security Features - RAVANOS Documentation</title>
 <link href="../assets/stylesheets/application.982221ab.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/application-palette.224b79ff.css" rel="stylesheet"/>
 <meta content="#2196f3" name="theme-color"/>
@@ -94,7 +94,7 @@
               RAVANOS Documentation
             </span>
 <span class="md-header-nav__topic">
-              Swap application and security features
+              Swap Application and Security Features
             </span>
 </div>
 </div>
@@ -148,8 +148,8 @@
       RavanOS Common Linux Edition
     </a>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
 <label class="md-nav__link" for="nav-2">
       Installation, configuration, maintenance OS
     </label>
@@ -193,6 +193,12 @@
       Installing RavanOS on Soft RAID
     </a>
 </li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./" title="Swap Application and Security Features">
+      Swap Application and Security Features
+    </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -204,12 +210,70 @@
 <div class="md-content">
 <article class="md-content__inner md-typeset"><a class="md-icon md-content__icon" download href="swap-application-and-security-features.pdf" title="PDF Export"></a>
 <a class="md-icon md-content__icon" href="https://github.com/ravanos/ravanos-wiki/edit/master/docs/swap-application-and-security-features.md" title="Edit this page"></a>
-<h1>Swap application and security features</h1>
+<h1>Swap Application and Security Features</h1>
+<p>Swap area (swap): application and security features</p>
+<p>The need to use swap</p>
+<p>The presence of the swap area is an important component of the memory management system, and is necessary for the normal functioning of the system .</p>
+<p>Wherein</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>n Acquiring backup RAM is not the primary purpose of paging.
+Its main purpose is to ensure the effective release and balancing of the use of available memory.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In fact, using the swap space as an “extra backup volume” is an abnormal situation, and requires measures to expand the hardware.</p>
+<p>n Linux-systems, there are different types of pages of RAM, each of which has its own characteristics, but two types are essential for understanding the need for paging:</p>
+<ol>
+<li>
+<p>Pages that can be restored by re-reading this content from files (pages with commands of executable processes, caches of their file data), so-called file cache;</p>
+</li>
+<li>
+<p>Pages of data on the distribution of memory between processes, the so-called. anonymous pages with no source files.</p>
+</li>
+</ol>
+<p>And the main purpose of the swap area is to free space in the memory for the file cache by unloading irrelevant anonymous pages. Thus, deleting the swap area will not prevent an increase in the total number of disk operations when the RAM is full, but simply replaces the disk operations of crowding out anonymous pages with repeated ones disk file read operations. This is not only less effective, since the choice of pages to update is less, but, in turn, also leads to even more memory overflow.</p>
+<p>Additionally, the swap area is usually used to organize sleep modes (hibernation or suspend to disk). When entering these modes in the swap area, a full copy of the RAM is saved. (In modern systems, you can provide a sleep mode without using the paging area, while preserving the contents of RAM in files).</p>
+</div>
+<p>Select and configure paging options</p>
+<p>Placing swap areas: disk partition or file?</p>
+<p>Modern Linux-based systems allow you to place the swap area in a dedicated disk partition, and in files. Regardless of the method of placement, modern versions of the Linux kernel provide approximately the same speed of paging, defining paging files, and using direct access to them. When working with disk drives, the fragmentation of these files can be a significant factor affecting the paging speed when working with files, so disk drives can be preferable for disk drives. When using solid-state drives file fragmentation is indifferent. In any case, the ability to dynamically disable / connect file swap areas makes it possible to efficiently use disk space by resizing the swap area as needed without interrupting system operation.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When installing RavanOS, by default, the swap area is automatically created in a separate disk partition.
+You can check where the swap area (s) are located (placed) with the command</p>
+<p><code>sudo swapon</code></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you need to check file fragmentation, use the filefrag command:</p>
+<p><code>sudo filefrag -v /example.swap</code></p>
+<p><code>To reduce file fragmentation in the Ext4 file system, use the e4defrag command:</code></p>
+<p>sudo e4defrag -v /example.swap
+When placing files on solid-state drives, defragmentation does not make any sense.</p>
+</div>
 </article>
 </div>
 </div>
 </main>
 <footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../installing-ravanos-on-soft-raid/" rel="prev" title="Installing RavanOS on Soft RAID">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Installing RavanOS on Soft RAID
+              </span>
+</div>
+</a>
+</nav>
+</div>
 <div class="md-footer-meta md-typeset">
 <div class="md-footer-meta__inner md-grid">
 <div class="md-footer-copyright">

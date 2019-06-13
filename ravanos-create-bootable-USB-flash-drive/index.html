@@ -196,6 +196,11 @@
       Setup Swap Area
     </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../build-software-raid-0/" title="Build Software RAID 0.md">
+      Build Software RAID 0.md
+    </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -227,12 +232,17 @@
 <p class="admonition-title">Hint</p>
 <p>You can find out the path to the USB device by running the command <code>lsblk</code>. Make sure it is not mounted.</p>
 </div>
-<p><div class="codehilite"><pre><span></span>dd bs = 4M if = / image.iso of = / dev / sd [x]
+<p><div class="codehilite"><pre><span></span>dd bs = 4M if = /image.iso of= /dev/sd [x]
 </pre></div>
 image.iso- the path to the image, <code>/dev/sd[x]</code>- the path to the USB device. Use exactly the path <code>/dev/sdx, not/dev/sdx1</code></p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>Be careful when specifying a USB device. The utility ddwill not ask questions.</p>
+<p>Windows</p>
+<p>Rufus utility</p>
+<p>Create bootable USB drives the easy way!</p>
+<p>Rufus is a utility that helps format and create bootable Flash / Pen / Key disks, memory cards, etc.</p>
+<p>Rufus will be especially useful in cases where:</p>
 </div>
 </article>
 </div>

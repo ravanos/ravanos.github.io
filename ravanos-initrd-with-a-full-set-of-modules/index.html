@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="ie=edge" http-equiv="x-ua-compatible"/>
-<link href="https://wiki.ravanos.org/build-software-raid-0/" rel="canonical"/>
+<link href="https://wiki.ravanos.org/ravanos-initrd-with-a-full-set-of-modules/" rel="canonical"/>
 <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
 <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
 <meta content="en" name="lang:search.language"/>
@@ -18,7 +18,7 @@
 <meta content="[\s\-]+" name="lang:search.tokenizer"/>
 <link href="../images/favicon.png" rel="shortcut icon"/>
 <meta content="mkdocs-1.0.4, mkdocs-material-4.0.2" name="generator"/>
-<title>Build Software RAID 0.md - RAVANOS Documentation</title>
+<title>RavanOS initrd with a full set of modules - RAVANOS Documentation</title>
 <link href="../assets/stylesheets/application.982221ab.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/application-palette.224b79ff.css" rel="stylesheet"/>
 <meta content="#2196f3" name="theme-color"/>
@@ -77,7 +77,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-<a class="md-skip" href="#stand-description" tabindex="1">
+<a class="md-skip" href="#package-installation-procedure" tabindex="1">
         Skip to content
       </a>
 <header class="md-header" data-md-component="header">
@@ -97,7 +97,7 @@
               RAVANOS Documentation
             </span>
 <span class="md-header-nav__topic">
-              Build Software RAID 0.md
+              RavanOS initrd with a full set of modules
             </span>
 </div>
 </div>
@@ -196,16 +196,29 @@
       Setup Swap Area
     </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./" title="Build Software RAID 0.md">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../build-software-raid-0/" title="Build Software RAID 0.md">
       Build Software RAID 0.md
     </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../ravanos-initrd-with-a-full-set-of-modules/" title="RavanOS initrd with a full set of modules">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        RavanOS initrd with a full set of modules
+      </label>
+<a class="md-nav__link md-nav__link--active" href="./" title="RavanOS initrd with a full set of modules">
       RavanOS initrd with a full set of modules
     </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#package-installation-procedure" title="Package Installation Procedure">
+    Package Installation Procedure
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -219,19 +232,73 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#package-installation-procedure" title="Package Installation Procedure">
+    Package Installation Procedure
+  </a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content">
-<article class="md-content__inner md-typeset"><a class="md-icon md-content__icon" download href="build-software-raid-0.pdf" title="PDF Export"></a>
-<a class="md-icon md-content__icon" href="https://github.com/ravanos/ravanos-wiki/edit/master/docs/build-software-raid-0.md" title="Edit this page"></a>
-<p>Build software RAID-0 (HPE ProLiant ML30 Gen9 server).</p>
-<h3 id="stand-description">Stand Description<a class="headerlink" href="#stand-description" title="Permanent link">¶</a></h3>
-<p>To install the OS, an HPE ProLiant ML30 Gen9 computer was used, which has 4 hard drives of 4 TB each.</p>
-<h3 id="disk-layout">Disk layout<a class="headerlink" href="#disk-layout" title="Permanent link">¶</a></h3>
-<p>At the stage of disk layout:</p>
-<h1 id="images">images<a class="headerlink" href="#images" title="Permanent link">¶</a></h1>
+<article class="md-content__inner md-typeset"><a class="md-icon md-content__icon" download href="ravanos-initrd-with-a-full-set-of-modules.pdf" title="PDF Export"></a>
+<a class="md-icon md-content__icon" href="https://github.com/ravanos/ravanos-wiki/edit/master/docs/ravanos-initrd-with-a-full-set-of-modules.md" title="Edit this page"></a>
+<h1>RavanOS initrd with a full set of modules</h1>
+<p>RavanOS ON Orel 2.12: initrd with a full set of modules</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This initrd option is not intended for use with OS OS Smolensk distributions. Option initrd for OS CH Smolensk can be provided on request.</p>
+</div>
+<p>To enable the installation of the RavanOS Orel 2.12 OS on computers with a small amount of RAM
+,the standard RavanOS Orel 2.12 distribution package includes the initrd start package containing only the most commonly used loadable modules.</p>
+<p>However, on some computers installation errors may occur due to the lack of necessary modules in the initrd:
+for example, the installation may not detect network cards or on some computers (Fujitsu) the graphics may not work properly.</p>
+<p>As a rule, such problem computers are relatively new, have a large amount of RAM, and for them you can use an extended initrd start package containing a full set of modules.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Those. This initrd option can be used by those who have some problems with a standard installation of the system.</p>
+</div>
+<p>This version of the initrd package includes:</p>
+<p>All kernel modules from the linux-image-4.15.3-1-generic package;</p>
+<div class="codehilite"><pre><span></span>* Firmware (from the linux-firmware package).
+</pre></div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This initrd option only works in EFI mode.</p>
+</div>
+<h3 id="package-installation-procedure">Package Installation Procedure<a class="headerlink" href="#package-installation-procedure" title="Permanent link">¶</a></h3>
+<div class="codehilite"><pre><span></span>* Format the 8GB usb-drive in fat32;
+
+* Mount USB drive;
+
+* Copy the RavanOS Orel 2.12 distribution package files to a usb-drive (to do this, either mount the distribution image or unpack it as an archive);
+</pre></div>
+<div class="admonition attention">
+<p class="admonition-title">Attention<p>As part of the distribution IME e tsya catalog . disk , to them I Kotor th beginning th tsya with characters of la «point». In Depending on the current user settings objects with the same names are ignored and not copied, so you should separately to make sure that the directory has also been copied.</p>
+</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When copying will be displayed messages about the inability to create symbolic links. E ti messages should be ignored.</p>
+<ul>
+<li>
+<p>Delete the install.amd folder from the copy on the usb drive;</p>
+</li>
+<li>
+<p>Download archive install.amd.tgz and unpack it to the root of the usb-drive;</p>
+</li>
+<li>
+<p>Boot from the upgraded usb drive;</p>
+</li>
+<li>
+<p>After the download, select the menu item “Install OS” or “Graphic OS Installation” in the menu and continue the OS installation as usual.</p>
+</li>
+</ul>
+</div>
 </article>
 </div>
 </div>
@@ -239,7 +306,7 @@
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../setup-swap-area/" rel="prev" title="Setup Swap Area">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../build-software-raid-0/" rel="prev" title="Build Software RAID 0.md">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -248,21 +315,8 @@
 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Setup Swap Area
+                Build Software RAID 0.md
               </span>
-</div>
-</a>
-<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../ravanos-initrd-with-a-full-set-of-modules/" rel="next" title="RavanOS initrd with a full set of modules">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-                  Next
-                </span>
-                RavanOS initrd with a full set of modules
-              </span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
 </div>
 </a>
 </nav>

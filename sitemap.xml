@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://wiki.ravanos.org/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/os-installation-guide/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/ravanos-cle-updates/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -27,27 +27,32 @@
     </url>
     <url>
      <loc>https://wiki.ravanos.org/list-of-packages-in-the-distribution/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/installing-ravanos-on-soft-raid/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/setup-swap-area/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/build-software-raid-0/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://wiki.ravanos.org/ravanos-initrd-with-a-full-set-of-modules/</loc>
-     <lastmod>2019-06-13</lastmod>
+     <lastmod>2019-06-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc></loc>
+     
      <changefreq>daily</changefreq>
     </url>
 </urlset>

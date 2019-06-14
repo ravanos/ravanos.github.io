@@ -1,0 +1,11 @@
+# Connecting repositories with packages in RavanOS and installing packages
+
+!!! info
+
+    RavanOS CE / RavanOS SE and Debian version correspondence tables can be viewed at the link: Additional packages and open source software.
+
+!!! Note
+
+    All commands specified in the document are executed with system administrator rights, after executing the command
+
+``` sudo su ```
